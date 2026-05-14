@@ -65,9 +65,15 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   Future<void> submitTugas(Product p, String githubUrl) async {
-    final success = await productService.submitTugas(p, githubUrl);
-    if (success) {
-      showSnackbar('Submit berhasil!', false);
+    try {
+      final success = await productService.submitTugas(p, githubUrl);
+      if (success) {
+        if (mounted) showSnackbar('Submit berhasil!', false);
+      } else {
+        if (mounted) showSnackbar('Gagal submit tugas', true);
+      }
+    } catch (e) {
+      if (mounted) showSnackbar('Terjadi kesalahan koneksi', true);
     }
   }
 

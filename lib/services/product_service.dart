@@ -79,6 +79,6 @@ class ProductService {
         'github_url': githubUrl,
       }),
     );
-    return response.statusCode == 200;
+    return response.statusCode == 200 || response.statusCode == 201;
   }
 }
